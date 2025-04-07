@@ -750,7 +750,7 @@ function getArtworkData(type) {
             {
                 title: 'Penny Wise',
                 description: 'Botanical watercolor study of local flora.',
-                imagePath: 'art/traditional/it.jpg',
+                imagePath: 'art/traditional/It.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-watercolor/',
                 youtubeUrl: ''
             },
