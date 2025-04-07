@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2342A5F5'>U</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">The Unleashed</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#digital">Digital Art</a></li>
+                    <li><a href="#traditional">Traditional Art</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="reveal">Welcome to Unleashed Art</h2>
+                <p class="reveal">Explore my collection of digital and traditional artworks</p>
+                <div class="cta-buttons reveal">
+                    <a href="#digital" class="btn">Digital Art</a>
+                    <a href="#traditional" class="btn">Traditional Art</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about social-intro">
+        <div class="container">
+            <h2 class="section-title reveal">About The Artist</h2>
+            <div class="about-content reveal">
+                <div class="profile-image">
+                    <div class="image-container">
+                        <img src="art/profile.jpg" alt="Artist Profile" id="profile-pic">
+                        <label for="profile-upload" class="upload-overlay">
+                            <i class="fas fa-camera"></i>
+                            <span>Update Photo</span>
+                        </label>
+                    </div>
+                    <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+                </div>
+                <div class="about-text">
+                    <p>Welcome to my art portfolio! I am a passionate artist with a love for creating both digital and traditional artwork. My work explores various themes and subjects through different media and techniques.</p>
+                    <p>Drawing inspiration from nature, culture, and personal experiences, I strive to create visually engaging pieces that connect with viewers on an emotional level.</p>
+                    <p>Feel free to explore my gallery and reach out if you're interested in commissions or collaborations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="digital" class="gallery">
+        <div class="container">
+            <h2 class="section-title reveal">Digital Art</h2>
+            <div class="gallery-container">
+                <!-- Gallery will be dynamically created via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="traditional" class="gallery">
+        <div class="container">
+            <h2 class="section-title reveal">Traditional Art</h2>
+            <div class="gallery-container">
+                <!-- Gallery will be dynamically created via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <div class="social-links reveal">
+                <a href="https://www.instagram.com/_._unleashed_._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
+                <!-- <a href="#" class="social-link"><i class="fab fa-behance"></i></a> -->
+                <!-- <a href="#" class="social-link"><i class="fab fa-twitter"></i></a> -->
+                <!-- <a href="#" class="social-link"><i class="fab fa-artstation"></i></a> -->
+                <a href="https://www.youtube.com/@The-Unleashed-1/featured" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="contact-form reveal">
+                <form>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
