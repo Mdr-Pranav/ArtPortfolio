@@ -486,121 +486,43 @@ function setupGalleryControls(type, track, container) {
 // Setup dragging functionality for the gallery
 function setupGalleryDragging(track, container) {
     let isDragging = false;
-    let startPosition = 0;
+    let startPos = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
-    
+    let animationID = 0;
+    let isPaused = false;
+
+    // Remove wheel event listener
+    // container.removeEventListener('wheel', handleWheel);
+
+    // Touch events
+    track.addEventListener('touchstart', dragStart);
+    track.addEventListener('touchmove', drag);
+    track.addEventListener('touchend', dragEnd);
+
     // Mouse events
     track.addEventListener('mousedown', dragStart);
     track.addEventListener('mousemove', drag);
     track.addEventListener('mouseup', dragEnd);
     track.addEventListener('mouseleave', dragEnd);
-    
-    // Touch events
-    track.addEventListener('touchstart', dragStart);
-    track.addEventListener('touchmove', drag);
-    track.addEventListener('touchend', dragEnd);
-    
-    // Mouse wheel / touchpad scroll events
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    
-    function handleWheel(e) {
-        e.preventDefault();
-        
-        // Pause animation during scroll
-        if (track.classList.contains('animate')) {
-            track.classList.remove('animate');
-            // Resume animation after a brief pause
-            setTimeout(() => {
-                if (!isDragging) {
-                    track.classList.add('animate');
-                }
-            }, 2000);
-        }
-        
-        // Get scroll direction and amount
-        // Set a threshold to reduce sensitivity
-        const scrollThreshold = 10;
-        let deltaX = e.deltaX;
-        let deltaY = e.deltaY;
-        
-        // Reduce scroll speed by accumulating scroll events
-        if (typeof handleWheel.scrollAccumulator === 'undefined') {
-            handleWheel.scrollAccumulator = 0;
-        }
-        
-        // Add haptic feedback for mobile if supported
-        if (navigator.vibrate && Math.abs(deltaX) > 50 || Math.abs(deltaY) > 50) {
-            navigator.vibrate(10); // Subtle vibration
-        }
-        
-        // Horizontal scroll (using shift+scroll or trackpad horizontal gesture)
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            // If horizontal scrolling is detected
-            handleWheel.scrollAccumulator += deltaX;
-            
-            // Only scroll when threshold is reached
-            if (Math.abs(handleWheel.scrollAccumulator) >= scrollThreshold) {
-                handleScroll(handleWheel.scrollAccumulator > 0 ? 1 : -1);
-                handleWheel.scrollAccumulator = 0; // Reset accumulator after scrolling
-            }
-        } else {
-            // If vertical scrolling, treat it as horizontal
-            handleWheel.scrollAccumulator += deltaY;
-            
-            // Only scroll when threshold is reached
-            if (Math.abs(handleWheel.scrollAccumulator) >= scrollThreshold) {
-                handleScroll(handleWheel.scrollAccumulator > 0 ? 1 : -1);
-                handleWheel.scrollAccumulator = 0; // Reset accumulator after scrolling
-            }
-        }
-        
-        function handleScroll(direction) {
-            // Add rate limiting to prevent too fast scrolling
-            // Implement a debounce effect
-            if (window.galleryScrollTimer) {
-                return;
-            }
-            
-            window.galleryScrollTimer = setTimeout(() => {
-                window.galleryScrollTimer = null;
-            }, 300); // Wait 300ms between scroll actions
-            
-            // Scrolling right
-            if (direction > 0) {
-                // Move the first item to the end
-                const firstItem = track.firstElementChild;
-                track.appendChild(firstItem);
-                
-                // Reattach click handlers
-                attachClickHandlers(track);
-            }
-            // Scrolling left
-            else if (direction < 0) {
-                // Move the last item to the beginning
-                const lastItem = track.lastElementChild;
-                track.prepend(lastItem);
-                
-                // Reattach click handlers
-                attachClickHandlers(track);
-            }
-        }
-    }
-    
+
     function dragStart(e) {
-        e.preventDefault();
+        if (isPaused) return;
         
         if (e.type === 'touchstart') {
-            startPosition = e.touches[0].clientX;
+            startPos = e.touches[0].clientX;
         } else {
-            startPosition = e.clientX;
+            startPos = e.clientX;
+            e.preventDefault();
         }
         
         isDragging = true;
-        track.classList.remove('animate');
-        track.classList.add('dragging');
+        track.style.cursor = 'grabbing';
+        
+        // Cancel any ongoing animation
+        cancelAnimationFrame(animationID);
     }
-    
+
     function drag(e) {
         if (!isDragging) return;
         
@@ -611,53 +533,14 @@ function setupGalleryDragging(track, container) {
             currentPosition = e.clientX;
         }
         
-        const diff = currentPosition - startPosition;
-        currentTranslate = prevTranslate + diff;
-        
+        currentTranslate = prevTranslate + currentPosition - startPos;
         track.style.transform = `translateX(${currentTranslate}px)`;
     }
-    
+
     function dragEnd() {
         isDragging = false;
-        
-        const trackWidth = track.offsetWidth;
-        const containerWidth = container.offsetWidth;
-        const itemWidth = track.querySelector('.gallery-item').offsetWidth + 20; // width + margin
-        const itemsInTrack = track.querySelectorAll('.gallery-item').length;
-        const itemsInOriginalSet = itemsInTrack / 2;
-        
-        // If dragged more than 100px to the right
-        if (currentTranslate > 100) {
-            // Move the last item to the beginning
-            for (let i = 0; i < Math.ceil(Math.abs(currentTranslate) / itemWidth); i++) {
-                const lastItem = track.lastElementChild;
-                track.prepend(lastItem);
-            }
-            // Reattach click handlers
-            attachClickHandlers(track);
-        }
-        // If dragged more than 100px to the left
-        else if (currentTranslate < -100) {
-            // Move the first item to the end
-            for (let i = 0; i < Math.ceil(Math.abs(currentTranslate) / itemWidth); i++) {
-                const firstItem = track.firstElementChild;
-                track.appendChild(firstItem);
-            }
-            // Reattach click handlers
-            attachClickHandlers(track);
-        }
-        
-        // Reset
-        prevTranslate = 0;
-        currentTranslate = 0;
-        track.style.transition = 'transform 0.5s ease';
-        track.style.transform = `translateX(0)`;
-        
-        // Resume animation after a brief pause
-        setTimeout(() => {
-            track.classList.remove('dragging');
-            track.classList.add('animate');
-        }, 1000);
+        track.style.cursor = 'grab';
+        prevTranslate = currentTranslate;
     }
 }
 
