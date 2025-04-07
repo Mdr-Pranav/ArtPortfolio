@@ -677,63 +677,63 @@ function getArtworkData(type) {
             {
                 title: 'Cat Design',
                 description: 'Cat character design for fun.',
-                imagePath: 'art/digital/Cat.jpg',
+                imagePath: 'art/Digital/Cat.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-character/',
                 youtubeUrl: 'https://youtube.com/shorts/mlZw7ttAYag?si=viLwWLKyRyn6907a'
             },
             {
                 title: 'Anya',
                 description: 'The character Anya from the anime series "Spy x Family".',
-                imagePath: 'art/digital/anya.jpg',
+                imagePath: 'art/Digital/Anya.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-abstract/',
                 youtubeUrl: 'https://www.youtube.com/watch?v=example-abstract'
             },
             {
                 title: 'Mr Beast',
                 description: 'Digital portrait of Mr Beast.',
-                imagePath: 'art/digital/mrbeast.jpg',
+                imagePath: 'art/Digital/MrBeast.jpg',
                 instagramUrl: '',
                 youtubeUrl: 'https://www.youtube.com/watch?v=example-portrait'
             },
             {
                 title: 'Concept Art',
                 description: 'Environment concept art for a science fiction project.',
-                imagePath: 'art/digital/mysteriousSky.jpg',
+                imagePath: 'art/Digital/MysteriousSky.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-concept/',
                 youtubeUrl: ''
             },
             {
                 title: 'digital illustration',
                 description: 'Illustration of a moment in time.',
-                imagePath: 'art/digital/sista.jpg',
+                imagePath: 'art/Digital/Sista.jpg',
                 instagramUrl: '',
                 youtubeUrl: ''
             },
             {
                 title: 'Baby Hanuman',
                 description: 'Illustration of the legendary monkey god Hanuman.',
-                imagePath: 'art/digital/babyHanuman.jpg',
+                imagePath: 'art/Digital/BabyHanuman.jpg',
                 instagramUrl: 'https://www.instagram.com/p/C73y1Y2Pw-e/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
                 youtubeUrl: 'https://youtube.com/shorts/5mZRfIhPaCI?si=KvqfH4JsNbIJJfWA'
             },
             {
                 title: 'Deadpool & Wolverine',
                 description: 'Imagining a crossover between Deadpool and Wolverine.',
-                imagePath: 'art/digital/deadpoolWolverine.jpg',
+                imagePath: 'art/Digital/DeadpoolWolverine.jpg',
                 instagramUrl: 'https://www.instagram.com/p/DAfovukNy8m/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
                 youtubeUrl: ''
             },
             {
                 title: 'Baby Yoda',
                 description: 'Illustration of baby Yoda in my style.',
-                imagePath: 'art/digital/Yoda.jpg',
+                imagePath: 'art/Digital/Yoda.jpg',
                 instagramUrl: 'https://www.instagram.com/p/C7q65tevxoI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
                 youtubeUrl: 'https://www.youtube.com/shorts/M5-An2FFs0o'
             },
             {
                 title: 'Krishna',
                 description: 'Illustration of Krishna from the movie - Kalki.',
-                imagePath: 'art/digital/krishnakalki.jpg',
+                imagePath: 'art/Digital/KrishnaKalki.jpg',
                 instagramUrl: 'https://www.instagram.com/reel/C9jR5hcPhzc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
                 youtubeUrl: 'https://youtube.com/shorts/ksfyEbwyROk?si=jArPNFCWnF2-m4SZ'
             }
@@ -743,28 +743,28 @@ function getArtworkData(type) {
             {
                 title: 'Hanuman',
                 description: 'Pencil Sketch of Hanuman.',
-                imagePath: 'art/traditional/hanuman.jpg',
+                imagePath: 'art/Traditional/Hanuman.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-oil/',
                 youtubeUrl: 'https://www.youtube.com/watch?v=example-oil'
             },
             {
                 title: 'Penny Wise',
                 description: 'Botanical watercolor study of local flora.',
-                imagePath: 'art/traditional/It.jpg',
+                imagePath: 'art/Traditional/It.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-watercolor/',
                 youtubeUrl: ''
             },
             {
                 title: 'Joker',
                 description: 'Pencil Sketch of Joker.',
-                imagePath: 'art/traditional/jokerface.jpg',
+                imagePath: 'art/Traditional/JokerFace.jpg',
                 instagramUrl: '',
                 youtubeUrl: 'https://www.youtube.com/watch?v=example-charcoal'
             },
             {
                 title: 'Doodle',
                 description: 'Experimental piece combining a peacock with doodling',
-                imagePath: 'art/traditional/peacockdoodle.jpg',
+                imagePath: 'art/Traditional/PeacockDoodle.jpg',
                 instagramUrl: 'https://www.instagram.com/p/example-mixed/',
                 youtubeUrl: 'https://www.youtube.com/watch?v=example-mixed'
             },
