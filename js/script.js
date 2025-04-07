@@ -676,6 +676,9 @@ function setupContactForm() {
     const contactForm = document.querySelector('.contact-form form');
     
     if (contactForm) {
+        // Initialize EmailJS
+        emailjs.init("QccKoKFbW-FpHZXYz");
+        
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -687,50 +690,60 @@ function setupContactForm() {
                 formValues[key] = value;
             }
             
-            // In a real implementation, you would send this data to your server
-            console.log('Form submitted:', formValues);
-            
-            // Show success message
-            const formGroups = contactForm.querySelectorAll('.form-group');
-            const submitButton = contactForm.querySelector('button');
-            
-            // Hide form fields
-            formGroups.forEach(group => {
-                group.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                group.style.opacity = '0';
-                group.style.transform = 'translateY(-20px)';
-            });
-            
-            submitButton.style.opacity = '0';
-            submitButton.style.transform = 'translateY(-20px)';
-            
-            // Create success message
-            setTimeout(() => {
-                // Clear the form container
-                contactForm.innerHTML = '';
+            // Send email using EmailJS
+            emailjs.send("service_12mgfou", "template_jyvmltp", {
+                from_name: formValues.name,
+                from_email: formValues.email,
+                message: formValues.message,
+                to_email: "unleashedcuber522@gmaill.com"
+            })
+            .then(() => {
+                // Show success message
+                const formGroups = contactForm.querySelectorAll('.form-group');
+                const submitButton = contactForm.querySelector('button');
+                
+                // Hide form fields
+                formGroups.forEach(group => {
+                    group.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    group.style.opacity = '0';
+                    group.style.transform = 'translateY(-20px)';
+                });
+                
+                submitButton.style.opacity = '0';
+                submitButton.style.transform = 'translateY(-20px)';
                 
                 // Create success message
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.innerHTML = `
-                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <h3>Message Sent Successfully!</h3>
-                    <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
-                `;
-                
-                successMessage.style.textAlign = 'center';
-                successMessage.style.padding = '2rem';
-                
-                // Add to DOM
-                contactForm.appendChild(successMessage);
-                
-                // Animate in
                 setTimeout(() => {
-                    successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    successMessage.style.opacity = '1';
-                    successMessage.style.transform = 'translateY(0)';
-                }, 100);
-            }, 300);
+                    // Clear the form container
+                    contactForm.innerHTML = '';
+                    
+                    // Create success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = `
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                        <h3>Message Sent Successfully!</h3>
+                        <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                    `;
+                    
+                    successMessage.style.textAlign = 'center';
+                    successMessage.style.padding = '2rem';
+                    
+                    // Add to DOM
+                    contactForm.appendChild(successMessage);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        successMessage.style.opacity = '1';
+                        successMessage.style.transform = 'translateY(0)';
+                    }, 100);
+                }, 300);
+            })
+            .catch((error) => {
+                console.error('Error sending email:', error);
+                alert('There was an error sending your message. Please try again later.');
+            });
         });
     }
 }
