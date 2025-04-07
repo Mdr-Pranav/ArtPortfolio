@@ -690,6 +690,42 @@ function setupContactForm() {
                 formValues[key] = value;
             }
             
+            // Show sending message
+            const formGroups = contactForm.querySelectorAll('.form-group');
+            const submitButton = contactForm.querySelector('button');
+            
+            // Hide form fields
+            formGroups.forEach(group => {
+                group.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                group.style.opacity = '0';
+                group.style.transform = 'translateY(-20px)';
+            });
+            
+            submitButton.style.opacity = '0';
+            submitButton.style.transform = 'translateY(-20px)';
+            
+            // Create sending message
+            const sendingMessage = document.createElement('div');
+            sendingMessage.className = 'sending-message';
+            sendingMessage.innerHTML = `
+                <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                <h3>Sending Message...</h3>
+                <p>Please wait while we send your message.</p>
+            `;
+            
+            sendingMessage.style.textAlign = 'center';
+            sendingMessage.style.padding = '2rem';
+            
+            // Add to DOM
+            contactForm.appendChild(sendingMessage);
+            
+            // Animate in
+            setTimeout(() => {
+                sendingMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                sendingMessage.style.opacity = '1';
+                sendingMessage.style.transform = 'translateY(0)';
+            }, 100);
+            
             // Send email using EmailJS
             emailjs.send("service_12mgfou", "template_jyvmltp", {
                 from_name: formValues.name,
@@ -698,51 +734,58 @@ function setupContactForm() {
                 to_email: "unleashedcuber522@gmaill.com"
             })
             .then(() => {
-                // Show success message
-                const formGroups = contactForm.querySelectorAll('.form-group');
-                const submitButton = contactForm.querySelector('button');
-                
-                // Hide form fields
-                formGroups.forEach(group => {
-                    group.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                    group.style.opacity = '0';
-                    group.style.transform = 'translateY(-20px)';
-                });
-                
-                submitButton.style.opacity = '0';
-                submitButton.style.transform = 'translateY(-20px)';
+                // Remove sending message
+                sendingMessage.remove();
                 
                 // Create success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = `
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Message Sent Successfully!</h3>
+                    <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                `;
+                
+                successMessage.style.textAlign = 'center';
+                successMessage.style.padding = '2rem';
+                
+                // Add to DOM
+                contactForm.appendChild(successMessage);
+                
+                // Animate in
                 setTimeout(() => {
-                    // Clear the form container
-                    contactForm.innerHTML = '';
-                    
-                    // Create success message
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'success-message';
-                    successMessage.innerHTML = `
-                        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                        <h3>Message Sent Successfully!</h3>
-                        <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
-                    `;
-                    
-                    successMessage.style.textAlign = 'center';
-                    successMessage.style.padding = '2rem';
-                    
-                    // Add to DOM
-                    contactForm.appendChild(successMessage);
-                    
-                    // Animate in
-                    setTimeout(() => {
-                        successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                        successMessage.style.opacity = '1';
-                        successMessage.style.transform = 'translateY(0)';
-                    }, 100);
-                }, 300);
+                    successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    successMessage.style.opacity = '1';
+                    successMessage.style.transform = 'translateY(0)';
+                }, 100);
             })
             .catch((error) => {
                 console.error('Error sending email:', error);
-                alert('There was an error sending your message. Please try again later.');
+                
+                // Remove sending message
+                sendingMessage.remove();
+                
+                // Create error message
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.innerHTML = `
+                    <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                    <h3>Error Sending Message</h3>
+                    <p>There was an error sending your message. Please try again later.</p>
+                `;
+                
+                errorMessage.style.textAlign = 'center';
+                errorMessage.style.padding = '2rem';
+                
+                // Add to DOM
+                contactForm.appendChild(errorMessage);
+                
+                // Animate in
+                setTimeout(() => {
+                    errorMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    errorMessage.style.opacity = '1';
+                    errorMessage.style.transform = 'translateY(0)';
+                }, 100);
             });
         });
     }
